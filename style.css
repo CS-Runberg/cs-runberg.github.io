@@ -1,0 +1,357 @@
+/* =========================================================
+   1. DESIGN TOKENS (CSS variables)
+   Change a value here and it updates everywhere on the site.
+   ========================================================= */
+:root {
+  /* Colors — light mode */
+  --bg:         #f6f4ef;   /* page background (warm off-white) */
+  --surface:    #ffffff;   /* cards / buttons */
+  --text:       #16181d;   /* main text */
+  --muted:      #5f636b;   /* secondary text */
+  --line:       #e3dfd6;   /* borders & timeline line */
+  --accent:     #9a7b3f;   /* gold accent */
+  --accent-ink: #ffffff;   /* text on top of accent color */
+
+  /* Fonts — "system" fonts already on every device = zero download time */
+  --font-sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+
+  /* Spacing & shape */
+  --space: 1rem;           /* 1rem = 16px by default */
+  --radius: 14px;
+  --max-width: 760px;      /* how wide the content gets on big screens */
+}
+
+/* Dark mode: kicks in automatically if the visitor's phone/computer is set to dark */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:      #0f1115;
+    --surface: #171a20;
+    --text:    #ece9e2;
+    --muted:   #9a9da5;
+    --line:    #2a2e36;
+    --accent:  #c9a96e;
+    --accent-ink: #0f1115;
+  }
+}
+
+/* =========================================================
+   2. RESET & BASE
+   Browsers add default spacing; we normalize it.
+   ========================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;      /* 17px — comfortable reading size */
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p { margin: 0; }
+
+a { color: inherit; }
+
+/* =========================================================
+   3. PAGE LAYOUT
+   clamp(min, preferred, max) = sizes that scale with the screen.
+   ========================================================= */
+.page {
+  max-width: var(--max-width);
+  margin-inline: auto;                         /* centers the page */
+  padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 5vw, 2.5rem);
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4rem);               /* space between sections */
+}
+
+/* =========================================================
+   4. HEADER / HERO  (uses CSS Grid)
+   ========================================================= */
+.hero {
+  display: grid;
+  grid-template-columns: auto 1fr;             /* monogram | text */
+  gap: clamp(1.25rem, 4vw, 2.5rem);
+  align-items: start;
+}
+
+.monogram {
+  width: clamp(72px, 14vw, 104px);
+  aspect-ratio: 1;                             /* keeps it a perfect square */
+  display: grid;
+  place-items: center;                         /* centers the letters */
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  letter-spacing: 0.04em;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(2.1rem, 6.5vw, 3.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.role {
+  margin-top: 0.6rem;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.bio {
+  margin-top: 1.25rem;
+  max-width: 58ch;                             /* ~58 characters per line = easy reading */
+}
+
+/* =========================================================
+   5. CONTACT LINKS  (uses Flexbox)
+   ========================================================= */
+.contact {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;                             /* wraps to new lines on small screens */
+  gap: 0.75rem;
+}
+
+.contact a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 1.1rem;
+  min-height: 44px;                            /* big enough to tap with a thumb */
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;                        /* pill shape */
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: border-color .2s, background .2s, color .2s, transform .2s;
+}
+
+.contact a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.contact svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;                        /* icon takes the text color */
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+/* =========================================================
+   6. SECTION HEADINGS
+   ========================================================= */
+.block h2 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.75rem;
+}
+
+/* thin line that extends to the right of each heading */
+.block h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* =========================================================
+   7. TIMELINE
+   ========================================================= */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;           /* date column | details column */
+  gap: 1.5rem;
+  padding-bottom: 2.25rem;
+  position: relative;
+}
+
+/* The vertical line */
+.entry::before {
+  content: "";
+  position: absolute;
+  left: calc(9.5rem + 0.75rem);                /* sits in the gap between columns */
+  top: 0.55rem;
+  bottom: 0;
+  width: 1px;
+  background: var(--line);
+}
+.entry:last-child::before { display: none; }   /* no line hanging off the last item */
+.entry:last-child { padding-bottom: 0; }
+
+/* The dot */
+.entry::after {
+  content: "";
+  position: absolute;
+  left: calc(9.5rem + 0.75rem - 4px);
+  top: 0.45rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--accent);
+}
+
+.when {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;          /* numbers line up neatly */
+  padding-top: 0.15rem;
+  text-align: right;
+}
+
+.what { padding-left: 1rem; }
+
+.what h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.org {
+  color: var(--accent);
+  font-size: 0.95rem;
+  margin: 0.15rem 0 0.5rem;
+}
+
+.what p:last-child { color: var(--muted); }
+
+/* =========================================================
+   8. STRENGTH TAGS
+   ========================================================= */
+.tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tags li {
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* =========================================================
+   9. FOOTER
+   ========================================================= */
+.footer {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* =========================================================
+   10. ACCESSIBILITY HELPERS
+   ========================================================= */
+.visually-hidden {               /* hidden on screen, still read by screen readers */
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-radius: 8px;
+  z-index: 10;
+}
+.skip-link:focus { top: 1rem; }
+
+/* Clear outline when navigating with the Tab key */
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Respect visitors who turn off animations in their device settings */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+/* =========================================================
+   11. PHONE LAYOUT (screens narrower than 600px)
+   ========================================================= */
+@media (max-width: 600px) {
+  .hero {
+    grid-template-columns: 1fr;                /* stack monogram above text */
+  }
+
+  /* Timeline: date moves above the job, line runs down the left edge */
+  .entry {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    padding-left: 1.75rem;
+  }
+  .entry::before { left: 4px; }
+  .entry::after  { left: 0; }
+  .when { text-align: left; }
+  .what { padding-left: 0; }
+
+  /* Contact buttons: neat 2×2 grid */
+  .contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .contact a { justify-content: center; }
+}
+
+/* =========================================================
+   12. PRINT  (makes "Print → Save as PDF" a clean résumé)
+   ========================================================= */
+@media print {
+  :root { --bg: #fff; --text: #000; --muted: #444; --line: #ccc; --accent: #000; }
+  .skip-link, .contact svg { display: none; }
+  .page { padding: 0; }
+  .contact a { border: none; padding: 0; }
+  .entry { break-inside: avoid; }
+}
