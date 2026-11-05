@@ -286,6 +286,112 @@ h1 {
 }
 
 /* =========================================================
+   9b. MENU (top of every page)
+   ========================================================= */
+.site-nav {
+  display: flex;
+  justify-content: space-between;              /* name on the left, links on the right */
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-name {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.site-nav ul a {
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: var(--muted);
+  padding: 0.5rem 0;                           /* taller tap target on phones */
+}
+
+.site-nav ul a:hover { color: var(--accent); }
+
+/* The page you're on: darker text plus a gold underline */
+.site-nav a[aria-current="page"] {
+  color: var(--text);
+  border-bottom: 2px solid var(--accent);
+}
+
+/* =========================================================
+   9c. PAGE TITLES (CV and Writing pages)
+   ========================================================= */
+.page-head { display: grid; gap: 0.6rem; justify-items: start; }
+.page-head .role a { color: var(--accent); }
+.page-head .bio { margin-top: 0.25rem; }
+
+/* Space between sections inside <main> */
+.stack {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4rem);
+}
+
+/* =========================================================
+   9d. BUTTON
+   ========================================================= */
+.button {
+  margin-top: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.6rem 1.2rem;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: none;
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.button:hover { filter: brightness(1.08); }
+
+/* =========================================================
+   9e. CARDS (signposts on Home, posts on Writing)
+   ========================================================= */
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));  /* side by side when there's room */
+  gap: 1rem;
+}
+
+.card {
+  display: grid;
+  gap: 0.4rem;
+  height: 100%;
+  padding: 1.25rem 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: border-color .2s, transform .2s;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+.card h3 { font-size: 1.1rem; font-weight: 600; line-height: 1.35; }
+.card p { color: var(--muted); font-size: 0.95rem; }
+.card-meta { font-size: 0.8rem !important; letter-spacing: 0.04em; }
+.card-more { color: var(--accent); font-size: 0.9rem; font-weight: 500; margin-top: 0.25rem; }
+
+/* =========================================================
    10. ACCESSIBILITY HELPERS
    ========================================================= */
 .visually-hidden {               /* hidden on screen, still read by screen readers */
@@ -349,7 +455,7 @@ a:focus-visible {
    ========================================================= */
 @media print {
   :root { --bg: #fff; --text: #000; --muted: #444; --line: #ccc; --accent: #000; }
-  .skip-link, .contact svg { display: none; }
+  .skip-link, .contact svg, .site-nav, .button { display: none; }
   .page { padding: 0; }
   .contact a { border: none; padding: 0; }
   .entry { break-inside: avoid; }
