@@ -361,6 +361,19 @@ h1 {
 }
 .button:hover { filter: brightness(1.08); }
 
+/* "What I Believe" paragraphs on the Home page */
+.values p { max-width: 62ch; }
+.values p + p { margin-top: 1rem; }          /* space between paragraphs */
+
+/* Short description under a section heading (Writing page) */
+.section-intro {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: -0.75rem 0 1.25rem;
+  max-width: 62ch;
+}
+.section-intro a { color: var(--accent); }
+
 /* =========================================================
    9e. CARDS (signposts on Home, posts on Writing)
    ========================================================= */
