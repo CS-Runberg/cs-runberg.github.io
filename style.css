@@ -1,38 +1,54 @@
 /* =========================================================
+   C.S. RUNBERG — site stylesheet
+   Brand: controlled newsroom chaos, a Druid's grove at its center.
+   Two themes:
+     • Night Shift (dark)          → Home page      <body class="theme-night">
+     • Daylight Manuscript (light) → CV & Writing   <body class="theme-parchment">
+   ========================================================= */
+
+/* =========================================================
    1. DESIGN TOKENS (CSS variables)
    Change a value here and it updates everywhere on the site.
+   These match the brand guide and the Canva Brand Kit.
    ========================================================= */
 :root {
-  /* Colors — light mode */
-  --bg:         #f6f4ef;   /* page background (warm off-white) */
-  --surface:    #ffffff;   /* cards / buttons */
-  --text:       #16181d;   /* main text */
-  --muted:      #5f636b;   /* secondary text */
-  --line:       #e3dfd6;   /* borders & timeline line */
-  --accent:     #9a7b3f;   /* gold accent */
-  --accent-ink: #ffffff;   /* text on top of accent color */
+  /* Brand colors that never change between themes */
+  --gold-fill:    #c9a24a;   /* Muted Gold: solid gold areas (buttons, rules) */
+  --on-gold:      #14120f;   /* text that sits ON a gold button */
+  --whiskey-fill: #c27a1f;   /* Whiskey: amber accents, used sparingly */
 
-  /* Fonts — "system" fonts already on every device = zero download time */
-  --font-sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  /* Fonts (loaded from Google Fonts in each page's <head>) */
+  --font-type:  "Special Elite", "Courier New", Courier, monospace;  /* the typewriter: name, headlines */
+  --font-serif: "EB Garamond", Garamond, Georgia, serif;              /* the scholar: everything you read */
 
   /* Spacing & shape */
   --space: 1rem;           /* 1rem = 16px by default */
-  --radius: 14px;
+  --radius: 2px;           /* barely softened, like a worn card corner. Paper has square corners. */
   --max-width: 760px;      /* how wide the content gets on big screens */
 }
 
-/* Dark mode: kicks in automatically if the visitor's phone/computer is set to dark */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg:      #0f1115;
-    --surface: #171a20;
-    --text:    #ece9e2;
-    --muted:   #9a9da5;
-    --line:    #2a2e36;
-    --accent:  #c9a96e;
-    --accent-ink: #0f1115;
-  }
+/* ---- Daylight Manuscript: aged parchment, iron-gall ink ---- */
+.theme-parchment {
+  --bg:      #f1e8d4;   /* Parchment */
+  --surface: #f8f2e4;   /* Vellum: cards */
+  --text:    #1c1a16;   /* Iron Gall Ink */
+  --muted:   #5c5344;
+  --line:    #d9cbaa;   /* hairline rules, like ruled copy paper */
+  --accent:  #7a5a14;   /* Old Gold (darker so it's readable on parchment) */
+  --grove:   #2f5a43;   /* Druid's-grove green */
+  --rubric:  #a3361f;   /* manuscript red: one mark per page at most */
+}
+
+/* ---- Night Shift: a desk lamp in an empty newsroom at 2 a.m. ---- */
+.theme-night {
+  --bg:      #14120f;   /* Ink Black */
+  --surface: #1f1c17;   /* Lamplit Desk: cards */
+  --text:    #ece2cc;   /* Parchment Text */
+  --muted:   #b3a78e;
+  --line:    #3a342a;
+  --accent:  #c9a24a;   /* Muted Gold */
+  --grove:   #8fb39a;   /* Moss */
+  --rubric:  #e07a5f;
 }
 
 /* =========================================================
@@ -47,9 +63,9 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-sans);
-  font-size: 1.0625rem;      /* 17px — comfortable reading size */
-  line-height: 1.65;
+  font-family: var(--font-serif);
+  font-size: 1.1875rem;      /* 19px: EB Garamond runs small, so it gets a bigger size */
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -64,64 +80,68 @@ a { color: inherit; }
 .page {
   max-width: var(--max-width);
   margin-inline: auto;                         /* centers the page */
-  padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 5vw, 2.5rem);
+  padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 5vw, 2.5rem);
   display: grid;
   gap: clamp(2.5rem, 6vw, 4rem);               /* space between sections */
 }
 
 /* =========================================================
-   4. HEADER / HERO  (uses CSS Grid)
+   4. HEADER / HERO  (Home page)
    ========================================================= */
 .hero {
   display: grid;
-  grid-template-columns: auto 1fr;             /* monogram | text */
+  grid-template-columns: auto 1fr;             /* logo | text */
   gap: clamp(1.25rem, 4vw, 2.5rem);
-  align-items: start;
+  align-items: start;                          /* logo sits level with the name, not mid-bio */
 }
 
-.monogram {
-  width: clamp(72px, 14vw, 104px);
-  aspect-ratio: 1;                             /* keeps it a perfect square */
-  display: grid;
-  place-items: center;                         /* centers the letters */
-  border-radius: 50%;
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
-  letter-spacing: 0.04em;
+/* The full mark: "C.S." seen through the bottom of a shot glass */
+.mark {
+  display: block;
+  width: clamp(120px, 24vw, 184px);            /* never smaller than 120px, per the brand guide */
+  height: auto;
 }
 
+/* Small uppercase label above a title (the "dateline") */
 .eyebrow {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  font-family: var(--font-type);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 0.5rem;
 }
 
+/* Page titles and the name: the typewriter voice */
 h1 {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: clamp(2.1rem, 6.5vw, 3.4rem);
+  font-family: var(--font-type);
+  font-weight: 400;                            /* Special Elite has one weight; its grit is the point */
+  font-size: clamp(2rem, 6.5vw, 3.2rem);
   line-height: 1.1;
-  letter-spacing: -0.01em;
+}
+
+/* A tagline in EB Garamond italic */
+.tagline {
+  margin-top: 0.6rem;
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--accent);
 }
 
 .role {
   margin-top: 0.6rem;
   color: var(--muted);
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
 .bio {
   margin-top: 1.25rem;
-  max-width: 58ch;                             /* ~58 characters per line = easy reading */
+  max-width: 60ch;                             /* ~60 characters per line = easy reading */
 }
 
 /* =========================================================
-   5. CONTACT LINKS  (uses Flexbox)
+   5. CONTACT LINKS  (uses Grid)
    ========================================================= */
 .contact {
   list-style: none;
@@ -141,11 +161,12 @@ h1 {
   min-height: 44px;                            /* big enough to tap with a thumb */
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 999px;                        /* pill shape */
+  border-radius: var(--radius);
   text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: border-color .2s, background .2s, color .2s, transform .2s;
+  font-family: var(--font-type);
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  transition: border-color .2s, color .2s, transform .2s;
 }
 
 .contact a:hover {
@@ -165,17 +186,18 @@ h1 {
 }
 
 /* =========================================================
-   6. SECTION HEADINGS
+   6. SECTION HEADINGS  (typewriter, with a hairline rule)
    ========================================================= */
 .block h2 {
   display: flex;
   align-items: center;
   gap: 1rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  font-family: var(--font-type);
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--accent);
   margin-bottom: 1.75rem;
 }
 
@@ -188,7 +210,7 @@ h1 {
 }
 
 /* =========================================================
-   7. TIMELINE
+   7. TIMELINE  (CV page)
    ========================================================= */
 .timeline {
   list-style: none;
@@ -210,7 +232,7 @@ h1 {
   content: "";
   position: absolute;
   left: calc(9.5rem + 0.75rem);                /* sits in the gap between columns */
-  top: 0.55rem;
+  top: 0.6rem;
   bottom: 0;
   width: 1px;
   background: var(--line);
@@ -218,12 +240,12 @@ h1 {
 .entry:last-child::before { display: none; }   /* no line hanging off the last item */
 .entry:last-child { padding-bottom: 0; }
 
-/* The dot */
+/* The dot: a tiny typewriter key */
 .entry::after {
   content: "";
   position: absolute;
   left: calc(9.5rem + 0.75rem - 4px);
-  top: 0.45rem;
+  top: 0.5rem;
   width: 9px;
   height: 9px;
   border-radius: 50%;
@@ -232,25 +254,26 @@ h1 {
 }
 
 .when {
-  font-size: 0.85rem;
+  font-family: var(--font-type);
+  font-size: 0.82rem;
   color: var(--muted);
-  font-variant-numeric: tabular-nums;          /* numbers line up neatly */
-  padding-top: 0.15rem;
+  padding-top: 0.25rem;
   text-align: right;
 }
 
 .what { padding-left: 1rem; }
 
 .what h3 {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.3;
 }
 
 .org {
   color: var(--accent);
-  font-size: 0.95rem;
-  margin: 0.15rem 0 0.5rem;
+  font-size: 1.05rem;
+  font-style: italic;
+  margin: 0.1rem 0 0.5rem;
 }
 
 .what p:last-child { color: var(--muted); }
@@ -268,10 +291,11 @@ h1 {
 }
 
 .tags li {
-  padding: 0.4rem 0.85rem;
+  padding: 0.35rem 0.8rem;
   border: 1px solid var(--line);
-  border-radius: 999px;
-  font-size: 0.875rem;
+  border-radius: var(--radius);
+  font-family: var(--font-type);
+  font-size: 0.82rem;
   color: var(--muted);
 }
 
@@ -281,9 +305,14 @@ h1 {
 .footer {
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);
-  font-size: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.95rem;
   color: var(--muted);
 }
+.footer .tagline { margin: 0; font-size: 1rem; }
 
 /* =========================================================
    9b. MENU (top of every page)
@@ -298,11 +327,16 @@ h1 {
   border-bottom: 1px solid var(--line);
 }
 
+/* Small key + name, linking home */
 .nav-name {
-  font-family: var(--font-serif);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-type);
   font-size: 1.1rem;
   text-decoration: none;
 }
+.nav-name img { width: 32px; height: 32px; display: block; }
 
 .site-nav ul {
   list-style: none;
@@ -313,6 +347,7 @@ h1 {
 }
 
 .site-nav ul a {
+  font-family: var(--font-type);
   text-decoration: none;
   font-size: 0.95rem;
   color: var(--muted);
@@ -321,7 +356,7 @@ h1 {
 
 .site-nav ul a:hover { color: var(--accent); }
 
-/* The page you're on: darker text plus a gold underline */
+/* The page you're on: full-strength text plus a gold underline */
 .site-nav a[aria-current="page"] {
   color: var(--text);
   border-bottom: 2px solid var(--accent);
@@ -333,6 +368,7 @@ h1 {
 .page-head { display: grid; gap: 0.6rem; justify-items: start; }
 .page-head .role a { color: var(--accent); }
 .page-head .bio { margin-top: 0.25rem; }
+.page-head .tagline { margin-top: 0; }
 
 /* Space between sections inside <main> */
 .stack {
@@ -341,7 +377,7 @@ h1 {
 }
 
 /* =========================================================
-   9d. BUTTON
+   9d. BUTTON  (solid gold, square-shouldered)
    ========================================================= */
 .button {
   margin-top: 0.5rem;
@@ -349,33 +385,47 @@ h1 {
   align-items: center;
   min-height: 44px;
   padding: 0.6rem 1.2rem;
-  font: inherit;
+  font-family: var(--font-type);
   font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--accent-ink);
-  background: var(--accent);
+  letter-spacing: 0.03em;
+  color: var(--on-gold);
+  background: var(--gold-fill);
   border: none;
-  border-radius: 999px;
+  border-radius: var(--radius);
   text-decoration: none;
   cursor: pointer;
 }
 .button:hover { filter: brightness(1.08); }
 
-/* "What I Believe" paragraphs on the Home page */
+/* =========================================================
+   9e. "WHAT I BELIEVE"  (the grove at the center of the newsroom)
+   ========================================================= */
+.values h2 { color: var(--grove); }
 .values p { max-width: 62ch; }
 .values p + p { margin-top: 1rem; }          /* space between paragraphs */
+
+/* The one manuscript flourish on the page: a gold drop cap, three lines deep */
+.values .lede::first-letter {
+  float: left;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 4.1em;
+  line-height: 0.8;
+  padding: 0.08em 0.1em 0 0;
+  color: var(--accent);
+}
 
 /* Short description under a section heading (Writing page) */
 .section-intro {
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   margin: -0.75rem 0 1.25rem;
   max-width: 62ch;
 }
 .section-intro a { color: var(--accent); }
 
 /* =========================================================
-   9e. CARDS (signposts on Home, posts on Writing)
+   9f. CARDS (signposts on Home, posts on Writing)
    ========================================================= */
 .cards {
   list-style: none;
@@ -389,6 +439,7 @@ h1 {
 .card {
   display: grid;
   gap: 0.4rem;
+  align-content: start;
   height: 100%;
   padding: 1.25rem 1.4rem;
   background: var(--surface);
@@ -399,10 +450,15 @@ h1 {
 }
 .card:hover { border-color: var(--accent); transform: translateY(-2px); }
 
-.card h3 { font-size: 1.1rem; font-weight: 600; line-height: 1.35; }
-.card p { color: var(--muted); font-size: 0.95rem; }
-.card-meta { font-size: 0.8rem !important; letter-spacing: 0.04em; }
-.card-more { color: var(--accent); font-size: 0.9rem; font-weight: 500; margin-top: 0.25rem; }
+.card h3 { font-size: 1.25rem; font-weight: 600; line-height: 1.3; }
+.card p { color: var(--muted); font-size: 1.05rem; line-height: 1.45; }
+.card-meta {
+  font-family: var(--font-type);
+  font-size: 0.78rem !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.card-more { font-family: var(--font-type); color: var(--accent); font-size: 0.88rem; margin-top: 0.35rem; }
 
 /* =========================================================
    10. ACCESSIBILITY HELPERS
@@ -420,15 +476,15 @@ h1 {
   left: 1rem;
   top: -3rem;
   padding: 0.5rem 1rem;
-  background: var(--accent);
-  color: var(--accent-ink);
-  border-radius: 8px;
+  background: var(--gold-fill);
+  color: var(--on-gold);
+  border-radius: var(--radius);
   z-index: 10;
 }
 .skip-link:focus { top: 1rem; }
 
 /* Clear outline when navigating with the Tab key */
-a:focus-visible {
+a:focus-visible, button:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
@@ -443,7 +499,7 @@ a:focus-visible {
    ========================================================= */
 @media (max-width: 600px) {
   .hero {
-    grid-template-columns: 1fr;                /* stack monogram above text */
+    grid-template-columns: 1fr;                /* stack the logo above the text */
   }
 
   /* Timeline: date moves above the job, line runs down the left edge */
@@ -467,8 +523,10 @@ a:focus-visible {
    12. PRINT  (makes "Print → Save as PDF" a clean résumé)
    ========================================================= */
 @media print {
-  :root { --bg: #fff; --text: #000; --muted: #444; --line: #ccc; --accent: #000; }
-  .skip-link, .contact svg, .site-nav, .button { display: none; }
+  .theme-parchment, .theme-night {
+    --bg: #fff; --surface: #fff; --text: #000; --muted: #444; --line: #ccc; --accent: #000;
+  }
+  .skip-link, .contact svg, .site-nav, .button, .mark { display: none; }
   .page { padding: 0; }
   .contact a { border: none; padding: 0; }
   .entry { break-inside: avoid; }

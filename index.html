@@ -6,17 +6,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Christopher Runberg — Bay City, Michigan</title>
   <meta name="description" content="Christopher Runberg of Bay City, Michigan. CV, writing, and contact information.">
-  <meta name="theme-color" content="#0f1115">
+  <meta name="theme-color" content="#14120f">
 
   <!-- Social share preview (what shows when your link is posted on Facebook/LinkedIn/texts) -->
   <meta property="og:title" content="Christopher Runberg">
   <meta property="og:description" content="CV, writing, and contact information.">
+  <meta property="og:image" content="https://runberg.info/assets/share-card.png">
   <meta property="og:type" content="profile">
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='28' fill='%23c9a96e'%3ECR%3C/text%3E%3C/svg%3E">
+  <!-- Favicon: the small "C.S" typewriter key -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <!-- Brand fonts from Google Fonts: Special Elite (typewriter) and EB Garamond (reading) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Special+Elite&display=swap">
+
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="theme-night">
 
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -25,7 +35,7 @@
     <!-- ========== MENU: the same block appears on every page ==========
          aria-current="page" marks which page you're on (it gets underlined). -->
     <nav class="site-nav" aria-label="Main">
-      <a class="nav-name" href="index.html">C.S. Runberg</a>
+      <a class="nav-name" href="index.html"><img src="assets/favicon.svg" alt="" width="32" height="32">C.S. Runberg</a>
       <ul>
         <li><a href="index.html" aria-current="page">Home</a></li>
         <li><a href="cv.html">CV</a></li>
@@ -35,11 +45,13 @@
 
     <!-- ========== HEADER: name, title, bio ========== -->
     <header class="hero">
-      <div class="monogram" aria-hidden="true">CR</div>
+      <!-- The full mark: "C.S." typewriter key seen through the bottom of a shot glass -->
+      <img class="mark" src="assets/cs-full-mark.svg" alt="C.S. monogram: a worn typewriter key seen through the bottom of a shot glass" width="184" height="184">
 
       <div class="hero-text">
         <p class="eyebrow">Bay City, Michigan</p>
         <h1>Christopher Runberg</h1>
+        <p class="tagline">Honest to a fault. Mostly my fault.</p>
         <p class="role">HDIS Sales Consultant &nbsp;·&nbsp; City Commissioner, Ward 7</p>
         <p class="bio">
           I've served as a Cavalry Scout in Iraq, spent over a decade in telecom
@@ -102,7 +114,7 @@
       <!-- ========== WHAT I BELIEVE ========== -->
       <section class="block values" aria-labelledby="values-heading">
         <h2 id="values-heading">What I Believe</h2>
-        <p>
+        <p class="lede">
           My North Star is leaving the world better than I found it. If I can say
           I did that, and did it my way, I'll have nothing to regret.
         </p>
@@ -155,6 +167,7 @@
     <footer class="footer">
       <!-- Remember to update the year each January -->
       <p>© 2026 Christopher Runberg</p>
+      <p class="tagline">Ink, whiskey, and the occasional epiphany.</p>
     </footer>
 
   </div>
