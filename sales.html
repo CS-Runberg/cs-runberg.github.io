@@ -48,6 +48,11 @@
     main { max-width: 36rem; margin: 0 auto; padding: 2.25rem 1.25rem 3rem; }
 
     /* Contact card block, patterned on the THD email signature standard */
+    /* Headshot: circle frame with an orange ring */
+    .headshot {
+      display: block; width: 120px; height: 120px; border-radius: 50%;
+      object-fit: cover; border: 3px solid var(--thd-orange); margin: 0 0 1.25rem;
+    }
     .card { border-left: 4px solid var(--thd-orange); padding-left: 1rem; }
     .card p { margin: 0; }
     .name  { font-weight: bold; font-size: 1.6rem; line-height: 1.2; }
@@ -83,6 +88,9 @@
   <div class="bar" aria-hidden="true"></div>
 
   <main>
+    <!-- Your photo, so customers know who they'll be meeting -->
+    <img class="headshot" src="assets/christopher-headshot.jpg" alt="Photo of Christopher Runberg" width="120" height="120">
+
     <!-- Pattern: Name | THE HOME DEPOT / Title, Department / phone / email -->
     <div class="card">
       <p class="name">Christopher Runberg<span class="sep" aria-hidden="true">|</span><span class="thd">The Home Depot</span></p>
