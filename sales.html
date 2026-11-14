@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ========== SALES CONTACT PAGE ==========
+       This is the page the in-store QR codes open. It is NOT linked from the
+       menu, so customers only see the Home Depot side of things.
+       It collects no customer information: the buttons only save a contact
+       card or open the phone's own call / text / email apps. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Christopher Runberg — HDIS Sales Consultant</title>
+  <meta name="description" content="Save Christopher Runberg's contact info to set up a door or window consultation.">
+  <meta name="theme-color" content="#14120f">
+  <!-- Keep this page out of Google search results; it's only for QR code visitors -->
+  <meta name="robots" content="noindex">
+
+  <!-- ========== GOOGLE ANALYTICS (GA4) ==========
+       Counts visits and button taps, anonymously. It reads the utm_ tags at the end
+       of each QR code's link, so you can tell which store and which code a visit came from.
+       To change the ID, replace G-XXXXXXXXXX in BOTH places below. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Special+Elite&display=swap">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- A few styles used only on this page -->
+  <style>
+    .sales { max-width: 34rem; margin-inline: auto; text-align: center; }
+    .sales .mark { margin: 0 auto 1.5rem; width: 120px; }
+    .sales .bio { margin-inline: auto; }
+    .sales .button { width: 100%; justify-content: center; font-size: 1.1rem; min-height: 52px; margin-top: 1.75rem; }
+    .sales .contact { margin-top: 0.75rem; }
+    .sales .contact a { min-height: 52px; font-size: 1rem; }
+    .sales .fine { margin-top: 1.5rem; color: var(--muted); font-size: 0.95rem; }
+  </style>
+</head>
+<body class="theme-night">
+
+  <div class="page">
+    <main id="main" class="sales">
+
+      <img class="mark" src="assets/cs-full-mark.svg" alt="" width="120" height="120">
+
+      <p class="eyebrow">The Home Depot · Doors &amp; Windows</p>
+      <h1>Christopher Runberg</h1>
+      <p class="role">HDIS Sales Consultant</p>
+
+      <p class="bio">
+        Thinking about new doors or windows? Save my contact, then call, text, or
+        email me to set up a free in-home consultation.
+      </p>
+
+      <!-- The main button: downloads a contact card the phone offers to save -->
+      <a class="button" href="christopher-runberg.vcf" download data-track="save_contact">Save my contact</a>
+
+      <ul class="contact">
+        <li>
+          <a href="tel:+17342455632" data-track="call_click">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A17 17 0 0 1 4.5 5a2 2 0 0 1 2-2z"/></svg>
+            <span>Call</span>
+          </a>
+        </li>
+        <li>
+          <a href="sms:+17342455632" data-track="text_click">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
+            <span>Text</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:christopher_runberg@homedepot.com?subject=Door%20%2F%20window%20consultation" data-track="email_click">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z M4 7l8 6 8-6"/></svg>
+            <span>Email</span>
+          </a>
+        </li>
+      </ul>
+
+      <p class="fine">734.245.5632 &nbsp;·&nbsp; christopher_runberg@homedepot.com</p>
+    </main>
+  </div>
+
+  <script>
+    // Count taps on each button in Google Analytics (no personal info is sent).
+    document.querySelectorAll('[data-track]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        if (typeof gtag === 'function') gtag('event', el.getAttribute('data-track'));
+      });
+    });
+  </script>
+</body>
+</html>
