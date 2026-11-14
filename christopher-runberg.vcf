@@ -2,9 +2,9 @@ BEGIN:VCARD
 VERSION:3.0
 N:Runberg;Christopher;;;
 FN:Christopher Runberg
-ORG:The Home Depot
-TITLE:HDIS Sales Consultant
-TEL;TYPE=WORK,VOICE:+1-734-245-5632
+ORG:The Home Depot;Home Depot Installation Services (HDIS)
+TITLE:Sales Consultant
+TEL;TYPE=CELL,VOICE:+1-734-245-5632
 EMAIL;TYPE=INTERNET,WORK:christopher_runberg@homedepot.com
-NOTE:Doors & windows installation — call, text, or email to set up a consultation.
+NOTE:Windows, doors and patio doors. Call, text or email to set up an in-home consultation.
 END:VCARD

@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ========== SALES CONTACT PAGE ==========
+  <!-- ========== SALES CONTACT PAGE (The Home Depot) ==========
        This is the page the in-store QR codes open. It is NOT linked from the
-       menu, so customers only see the Home Depot side of things.
+       menu, and it does NOT use the C.S. Runberg personal brand. It follows
+       The Home Depot brand rules instead (Arial only, orange #F96302 and black).
+       No logo or themeline is used: those may only come from approved files.
        It collects no customer information: the buttons only save a contact
        card or open the phone's own call / text / email apps. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Christopher Runberg — HDIS Sales Consultant</title>
-  <meta name="description" content="Save Christopher Runberg's contact info to set up a door or window consultation.">
-  <meta name="theme-color" content="#14120f">
+  <title>Christopher Runberg | The Home Depot</title>
+  <meta name="description" content="Save Christopher Runberg's contact info to set up a windows, doors or patio doors consultation.">
+  <meta name="theme-color" content="#F96302">
   <!-- Keep this page out of Google search results; it's only for QR code visitors -->
   <meta name="robots" content="noindex">
 
   <!-- ========== GOOGLE ANALYTICS (GA4) ==========
        Counts visits and button taps, anonymously. It reads the utm_ tags at the end
        of each QR code's link, so you can tell which store and which code a visit came from.
-       To change the ID, replace G-G420HN9X2R in BOTH places below. -->
+       To change the ID, replace it in BOTH places below. -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-G420HN9X2R"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -26,70 +28,92 @@
     gtag('config', 'G-G420HN9X2R');
   </script>
 
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Special+Elite&display=swap">
-
-  <link rel="stylesheet" href="style.css">
-
-  <!-- A few styles used only on this page -->
+  <!-- All styles for this page live here, so the personal site's look doesn't leak in -->
   <style>
-    .sales { max-width: 34rem; margin-inline: auto; text-align: center; }
-    .sales .mark { margin: 0 auto 1.5rem; width: 120px; }
-    .sales .bio { margin-inline: auto; }
-    .sales .button { width: 100%; justify-content: center; font-size: 1.1rem; min-height: 52px; margin-top: 1.75rem; }
-    .sales .contact { margin-top: 0.75rem; }
-    .sales .contact a { min-height: 52px; font-size: 1rem; }
-    .sales .fine { margin-top: 1.5rem; color: var(--muted); font-size: 0.95rem; }
+    :root {
+      --thd-orange: #F96302;   /* PMS 165 */
+      --thd-black:  #000000;
+      --thd-gray:   #999999;   /* Cool Gray 8 */
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #FFFFFF;
+      color: var(--thd-black);
+      font-family: Arial, Helvetica, sans-serif;   /* brand rule: Arial family only */
+      font-size: 1.05rem;
+      line-height: 1.45;
+    }
+    .bar { height: 8px; background: var(--thd-orange); }   /* orange accent strip, not a logo */
+    main { max-width: 36rem; margin: 0 auto; padding: 2.25rem 1.25rem 3rem; }
+
+    /* Contact card block, patterned on the THD email signature standard */
+    .card { border-left: 4px solid var(--thd-orange); padding-left: 1rem; }
+    .card p { margin: 0; }
+    .name  { font-weight: bold; font-size: 1.6rem; line-height: 1.2; }
+    .name .sep { color: var(--thd-gray); font-weight: normal; margin: 0 .35rem; }
+    .thd   { font-weight: bold; text-transform: uppercase; color: var(--thd-orange); font-size: 1.1rem; }
+    .thd   { white-space: nowrap; }
+    /* On phones, put THE HOME DEPOT on its own line instead of after a "|" */
+    @media (max-width: 600px) {
+      .name .sep { display: none; }
+      .name .thd { display: block; margin-top: .3rem; }
+    }
+    .title { font-weight: bold; margin-top: .4rem !important; }
+    .phone, .email { font-weight: normal; }
+
+    .intro { margin: 1.75rem 0 1.25rem; }
+
+    /* Buttons: big enough to tap with a thumb */
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: .6rem;
+      width: 100%; min-height: 54px; margin-bottom: .75rem;
+      border-radius: 4px; text-decoration: none;
+      font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 1.2rem;
+    }
+    .btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+    .btn-primary { background: var(--thd-orange); color: #FFFFFF; }
+    .btn-secondary { background: #FFFFFF; color: var(--thd-black); border: 2px solid var(--thd-black); }
+    .btn:focus-visible { outline: 3px solid var(--thd-black); outline-offset: 2px; }
+
+    .fine { margin-top: 1.5rem; color: #555555; font-size: .9rem; }
   </style>
 </head>
-<body class="theme-night">
+<body>
+  <div class="bar" aria-hidden="true"></div>
 
-  <div class="page">
-    <main id="main" class="sales">
+  <main>
+    <!-- Pattern: Name | THE HOME DEPOT / Title, Department / phone / email -->
+    <div class="card">
+      <p class="name">Christopher Runberg<span class="sep" aria-hidden="true">|</span><span class="thd">The Home Depot</span></p>
+      <p class="title">Sales Consultant, Home Depot Installation Services (HDIS)</p>
+      <p class="phone">M: 734-245-5632</p>
+      <p class="email">christopher_runberg@homedepot.com</p>
+    </div>
 
-      <img class="mark" src="assets/cs-full-mark.svg" alt="" width="120" height="120">
+    <p class="intro">
+      Thinking about new windows, doors or patio doors? Save my contact, then call,
+      text or email me to set up an in-home consultation.
+    </p>
 
-      <p class="eyebrow">The Home Depot · Doors &amp; Windows</p>
-      <h1>Christopher Runberg</h1>
-      <p class="role">HDIS Sales Consultant</p>
+    <!-- The main button: downloads a contact card the phone offers to save -->
+    <a class="btn btn-primary" href="christopher-runberg.vcf" download data-track="save_contact">Save my contact</a>
 
-      <p class="bio">
-        Thinking about new doors or windows? Save my contact, then call, text, or
-        email me to set up a free in-home consultation.
-      </p>
+    <a class="btn btn-secondary" href="tel:+17342455632" data-track="call_click">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A17 17 0 0 1 4.5 5a2 2 0 0 1 2-2z"/></svg>
+      Call
+    </a>
+    <a class="btn btn-secondary" href="sms:+17342455632" data-track="text_click">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
+      Text
+    </a>
+    <a class="btn btn-secondary" href="mailto:christopher_runberg@homedepot.com?subject=Windows%20and%20doors%20consultation" data-track="email_click">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z M4 7l8 6 8-6"/></svg>
+      Email
+    </a>
 
-      <!-- The main button: downloads a contact card the phone offers to save -->
-      <a class="button" href="christopher-runberg.vcf" download data-track="save_contact">Save my contact</a>
-
-      <ul class="contact">
-        <li>
-          <a href="tel:+17342455632" data-track="call_click">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A17 17 0 0 1 4.5 5a2 2 0 0 1 2-2z"/></svg>
-            <span>Call</span>
-          </a>
-        </li>
-        <li>
-          <a href="sms:+17342455632" data-track="text_click">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
-            <span>Text</span>
-          </a>
-        </li>
-        <li>
-          <a href="mailto:christopher_runberg@homedepot.com?subject=Door%20%2F%20window%20consultation" data-track="email_click">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z M4 7l8 6 8-6"/></svg>
-            <span>Email</span>
-          </a>
-        </li>
-      </ul>
-
-      <p class="fine">734.245.5632 &nbsp;·&nbsp; christopher_runberg@homedepot.com</p>
-    </main>
-  </div>
+    <p class="fine">This page doesn't ask for or store any of your information.</p>
+  </main>
 
   <script>
     // Count taps on each button in Google Analytics (no personal info is sent).
